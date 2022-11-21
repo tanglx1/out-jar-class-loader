@@ -32,7 +32,13 @@ public class JarFileArchive {
                 URL url = new URL("jar", "", -1, jarFilePath);//jar:file:/D:/workspace/rabbit/amqp-client-5.5.0.jar!/
                 urls.add(url);
             }
+        }else if(lib.endsWith("jar")){
+            String jarFilePath = file.toURI() + "!/";
+            jarFilePath = jarFilePath.replace("file:////", "file://"); // Fix UNC paths
+            URL url = new URL("jar", "", -1, jarFilePath);
+            urls.add(url);
         }
+
         System.out.println(urls);
         return urls;
     }
